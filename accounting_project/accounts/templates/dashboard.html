@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accounting Dashboard</title>
+    <style>
+        body { margin: 0; font-family: Arial; }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #333;
+            color: white;
+            float: left;
+            padding: 20px;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        h2 { color: #f1f1f1; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 5px 0; }
+        .form-box {
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 6px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Levels</h2>
+        <ul>
+            {% for lvl in levels %}
+                <li>{{ lvl.lev_title }} ({{ lvl.group.group_title }})</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Chart of Accounts</h2>
+        <ul>
+            {% for acc in accounts %}
+                <li>{{ acc.acc_title }} (Level: {{ acc.level.lev_title }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Add New Data</h1>
+        <div class="form-box">
+            <form method="post">
+                {% csrf_token %}
+                <label>Group Title:</label><br>
+                <input type="text" name="group_title"><br><br>
+
+                <label>Level Title:</label><br>
+                <input type="text" name="lev_title"><br><br>
+
+                <label>Account Title:</label><br>
+                <input type="text" name="acc_title"><br><br>
+
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
