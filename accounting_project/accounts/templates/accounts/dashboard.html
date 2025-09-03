@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block accounts_active %}active{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<!-- Add Group -->
+<div class="card mb-4" id="groups-form">
+  <div class="card-header bg-light"><strong>Add Group</strong></div>
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="create_group">
+      <div class="mb-3">
+        <label class="form-label">Group Title</label>
+        <input type="text" class="form-control" name="group_title" maxlength="20" required>
+      </div>
+      <button type="submit" class="btn btn-custom">Save Group</button>
+    </form>
+  </div>
+</div>
+
+<!-- Add Level -->
+<div class="card mb-4" id="levels-form">
+  <div class="card-header bg-light"><strong>Add Level</strong></div>
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="create_level">
+      <div class="mb-3">
+        <label class="form-label">Level Title</label>
+        <input type="text" class="form-control" name="lev_title" maxlength="50" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Previous ID (optional)</label>
+        <input type="number" class="form-control" name="pre_id" placeholder="null if none">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Group</label>
+        <select class="form-select" name="group_id" required>
+          <option value="">-- Select Group --</option>
+          {% for g in groups %}
+          <option value="{{ g.group_id }}">{{ g.group_title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-custom">Save Level</button>
+    </form>
+  </div>
+</div>
+
+<!-- Add Account -->
+<div class="card mb-4" id="accounts-form">
+  <div class="card-header bg-light"><strong>Add Account</strong></div>
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="create_account">
+      <div class="mb-3">
+        <label class="form-label">Account Title</label>
+        <input type="text" class="form-control" name="acc_title" maxlength="100" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Level</label>
+        <select class="form-select" name="level_id" required>
+          <option value="">-- Select Level --</option>
+          {% for l in levels %}
+          <option value="{{ l.lev_id }}">{{ l.lev_title }} (Group: {{ l.group.group_title }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-custom">Save Account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
