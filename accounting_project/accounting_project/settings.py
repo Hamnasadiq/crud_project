@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'accounting_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'erp',     # create this DB in MySQL first
+        'NAME': 'softixer',     # create this DB in MySQL first
         'USER': 'root',              # your MySQL username
-        'PASSWORD': '',  # your MySQL password
+        'PASSWORD': 'user$123',  # your MySQL password
         'HOST': 'localhost',         # or 127.0.0.1
         'PORT': '3306',              # default MySQL port
         

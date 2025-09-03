@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart of Accounts</title>
+</head>
+<body>
+    <h1>Chart of Accounts</h1>
+    <a href="{% url 'chart_of_accounts_create' %}">Add Account</a>
+    <ul>
+        {% for account in accounts %}
+            <li>
+                {{ account.account_name }} ({{ account.account_number }})
+                <a href="{% url 'chart_of_accounts_edit' account.id %}">Edit</a>
+                <a href="{% url 'chart_of_accounts_delete' account.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
